@@ -24,5 +24,17 @@ namespace EFCore.Controllers
         {
             return await _context.Employees.FirstOrDefaultAsync();
         }
+
+        [HttpPost("create-employee")]
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        {
+             _context.Employees.Add(employee);
+            var ati = _context.Entry(employee).State;
+            _context.SaveChanges();
+             
+            return await _context.Employees.FirstOrDefaultAsync();
+        }
+
+
     }
 }
